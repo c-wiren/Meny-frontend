@@ -1,1 +1,45 @@
-$enable-responsive-font-sizes: true
+// Text
+$headings-font-weight: 600;
+
+// Cards
+$card-border-width: 0;
+
+// Buttons
+$input-btn-font-size: 1rem;
+$btn-font-weight: 600;
+$input-btn-padding-y: 0.6rem;
+$input-btn-padding-x: 1rem;
+
+$enable-responsive-font-sizes: true;
+$border-radius: 0.7rem;
+$border-radius-lg: 1rem;
+$card-border-radius: $border-radius-lg;
+
+.h5,
+.h6 {
+  line-height: 1.5 !important;
+}
+
+:root {
+  font-size: 18px;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+// Colors
+$theme-colors: (
+  "primary": #057afb,
+  "secondary": #aaa
+);
+.large {
+  font-size: 1.2rem;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.disabled {
+  pointer-events: none;
+}
+.text-decoration-none {
+  text-decoration: none !important;
+}

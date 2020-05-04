@@ -1,27 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Menu from '../views/Menu.vue'
 import Date from '../views/Date.vue'
 
 
 Vue.use(VueRouter)
 
-  const routes = [
-  {
+const routes = [{
     path: '/',
-    name: 'Home',
-    component: Home,
-    children: [
-      {
-      path: 'date/:_id',
-      component: Date
-    }
-    ]
+    component: Menu,
+  },
+  {
+    path: "/date/:_id",
+    component: Date
   }
 ]
 
 const router = new VueRouter({
-    mode: "history",
+  mode: "history",
   routes,
 })
 
