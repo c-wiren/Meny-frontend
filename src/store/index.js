@@ -18,6 +18,12 @@ export default new Vuex.Store({
         link: "https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/",
         description: "Blanda mjöl, ägg och paprika i en skål."
       },
+      "1": {
+        _id: "1",
+        name: "Nudlar i ugn",
+        link: "https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/",
+        description: "Blanda mjöl, ägg och paprika i en skål."
+      },
 
     }
   },
@@ -25,7 +31,10 @@ export default new Vuex.Store({
     removeDish(state, payload) {
       const index = state.dates[payload.dateId].dishIds.findIndex(x => x == payload.dishId);
       if (index != -1) state.dates[payload.dateId].dishIds.splice(index, 1);
-    }
+    },
+    addDish(state, payload) {
+      state.dates[payload.dateId].dishIds.push(payload.dishId);
+    },
   },
   actions: {},
   modules: {}

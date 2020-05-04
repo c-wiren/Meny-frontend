@@ -1,9 +1,9 @@
 <template>
 <div id="app">
   <keep-alive include="Menu">
-    <transition :name="transitionName">
-      <router-view />
-    </transition>
+    <!--<transition :name="transitionName">-->
+    <router-view />
+    <!--</transition>-->
   </keep-alive>
 </div>
 </template>

@@ -24,12 +24,13 @@
         Recept</b-button>
     </b-card>
     <div class="my-5">
-      <b-button variant="link" class="text-secondary" block>
+      <b-button :to="$route.path + '/add'" variant="link" class="text-secondary" block>
         <b-icon icon="plus" scale="2" />
         <small class="d-block my-1 text-decoration-none">Lägg till</small>
       </b-button>
     </div>
   </b-container>
+  <router-view />
 </div>
 </template>
 <script>
