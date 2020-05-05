@@ -1,32 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import searchPlugin from 'vuex-search';
+import state from './state';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    dates: {
-      "2020-05-04": {
-        dishIds: ["0"]
-      },
-    },
-    dishes: {
-      "0": {
-        _id: "0",
-        name: "Amerikanska pannkakor",
-        image: "https://images.media-allrecipes.com/userphotos/560x315/4948036.jpg",
-        link: "https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/",
-        description: "Blanda mjöl, ägg och paprika i en skål."
-      },
-      "1": {
-        _id: "1",
-        name: "Nudlar i ugn",
-        link: "https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/",
-        description: "Blanda mjöl, ägg och paprika i en skål."
-      },
-
-    }
-  },
+  state,
   mutations: {
     removeDish(state, payload) {
       const index = state.dates[payload.dateId].dishIds.findIndex(x => x == payload.dishId);
@@ -37,5 +17,22 @@ export default new Vuex.Store({
     },
   },
   actions: {},
-  modules: {}
+  modules: {},
+  plugins: [
+    searchPlugin({
+      resources: {
+        contacts: {
+          // what fields to index
+          index: ['address', 'name'],
+          // access the state to be watched by Vuex Search
+          getter: state => state.myResources.contacts,
+          // how resource should be watched
+          watch: {
+            delay: 500
+          },
+        },
+        // otherResource: { index, getter, watch, searchApi },
+      },
+    }),
+  ],
 })

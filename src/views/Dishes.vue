@@ -1,7 +1,6 @@
 <template>
-<b-container>
+<b-container class="my-3">
   <div class="text-center mb-2">
-    <h2 class="h6 py-2 my-0">Lägg till rätt</h2>
     <b-form-input placeholder="Sök" />
   </div>
   <div class="border rounded px-2">
