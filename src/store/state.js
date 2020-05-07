@@ -1,6 +1,6 @@
 export default {
   dates: {
-    "2020-05-04": {
+    "2020-05-05": {
       dishIds: ["0"]
     },
   },
@@ -14,7 +14,7 @@ export default {
     },
     "1": {
       _id: "1",
-      name: "Nudlar i ugn",
+      name: "Crème Brulée",
       link: "https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/",
       description: "Blanda mjöl, ägg och paprika i en skål."
     },
