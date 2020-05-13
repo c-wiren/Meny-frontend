@@ -4,7 +4,7 @@
     <b-link v-else class="float-left" @click="$router.go(-1)">
       <b-icon icon="chevron-left" scale="1.4" />Meny
     </b-link>
-    <b-link class="float-right">
+    <b-link @click="newDish" class="float-right">
       <b-icon icon="pencil-square" scale="1.2" />
     </b-link>
     <h1 class="h6 text-center pb-2 m-auto w-50">Rätter</h1>
@@ -26,6 +26,14 @@
 </template>
 <script>
 export default {
+  methods: {
+    newDish() {
+      this.$store.commit("newDish");
+      this.$router.push(
+        `${this.$route.path}/${this.$store.state.newDish}/edit`
+      );
+    }
+  },
   props: ["date"],
   data() {
     return {

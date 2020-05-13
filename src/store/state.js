@@ -19,5 +19,6 @@ export default {
       description: "Blanda mjöl, ägg och paprika i en skål."
     },
 
-  }
+  },
+  newDish: null,
 }

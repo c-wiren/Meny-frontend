@@ -4,11 +4,11 @@
       <b-link @click="$router.go(-1)" class="float-left">Avbryt</b-link>
       <b-link
         @click="done"
-        :disabled="dish.name == originalDish.name && dish.description == originalDish.description && dish.link == originalDish.link"
+        :disabled="!dish.name || (dish.name == originalDish.name && dish.description == originalDish.description && dish.link == originalDish.link)"
         class="float-right"
       >Klar</b-link>
     </div>
-    <b-form class="py-3">
+    <b-form id="form" class="py-3">
       <div v-if="dish.image" class="text-center my-2">
         <img :src="dish.image" class="w-50 rounded" />
         <b-link class="d-block my-1">Ändra</b-link>
@@ -27,15 +27,45 @@
 </template>
 <script>
 export default {
+  created() {
+    if (
+      this.$route.params.dishId != this.$store.state.newDish &&
+      !this.$store.state.dishes[this.$route.params.dishId]
+    ) {
+      this.$router.replace("/404");
+    }
+  },
   methods: {
     done() {
-      this.$store.commit("updateDish", this.dish);
-      this.$router.go(-1);
+      if (!Object.keys(this.originalDish).length) {
+        this.$store.commit("createDish", {
+          _id: this.$route.params.dishId,
+          description: null,
+          link: null,
+          image: null,
+          ...this.dish
+        });
+      } else {
+        this.$store.commit("updateDish", this.dish);
+      }
+      var navigateTo;
+      switch (this.$route.name) {
+        case "EditDish":
+          navigateTo = "Dish";
+          break;
+        case "DateEditDish":
+          navigateTo = "Date";
+          break;
+        case "DateAddEditDish":
+          navigateTo = "DateDish";
+          break;
+      }
+      this.$router.replace({ name: navigateTo });
     }
   },
   data() {
     return {
-      originalDish: this.$store.state.dishes[this.$route.params.dishId],
+      originalDish: { ...this.$store.state.dishes[this.$route.params.dishId] },
       dish: { ...this.$store.state.dishes[this.$route.params.dishId] }
     };
   }

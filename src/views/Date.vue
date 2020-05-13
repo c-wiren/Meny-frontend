@@ -33,6 +33,7 @@
           variant="outline-primary"
           block
           class="card-link"
+          v-if="dish.link"
           :href="dish.link"
           target="_blank"
           rel="noopener noreferrer"

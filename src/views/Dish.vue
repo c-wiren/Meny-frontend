@@ -7,13 +7,22 @@
     <img class="image-full mt-2 mb-3 w-100 rounded" :src="dish.image" />
     <h1 class="h4">{{dish.name}}</h1>
     <p v-html="dish.description"></p>
+    <template v-if="date">
+      <b-button
+        disabled
+        variant="success"
+        block
+        v-if="$store.state.dates[date] && $store.state.dates[date].dishIds.includes($route.params.dishId)"
+      >Tillagd</b-button>
+      <b-button
+        @click="$store.commit('addDish', {dateId: date, dishId: $route.params.dishId}); $router.go(-2)"
+        variant="success"
+        block
+        v-else
+      >Lägg till</b-button>
+    </template>
     <b-button
-      @click="$store.commit('addDish', {dateId: date, dishId: $route.params.dishId}); $router.go(-2)"
-      variant="success"
-      block
-      v-if="date"
-    >Lägg till</b-button>
-    <b-button
+      v-if="dish.link"
       variant="outline-primary"
       block
       class="card-link"

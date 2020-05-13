@@ -5,6 +5,7 @@ import Date from '../views/Date.vue'
 import Dishes from '../views/Dishes.vue'
 import Dish from '../views/Dish.vue'
 import EditDish from '../views/EditDish.vue'
+import NotFound from '../views/404.vue'
 
 
 Vue.use(VueRouter)
@@ -20,33 +21,49 @@ const routes = [{
   children: [
     {
       path: "add",
-      component: Dishes
+      component: Dishes,
+      name: "DateDishes"
     },
     {
       path: "add/:dishId",
-      component: Dish
+      component: Dish,
+      name: "DateDish"
     },
     {
       path: "add/:dishId/edit",
-      component: EditDish
+      component: EditDish,
+      name: "DateAddEditDish"
     },
     {
       path: "edit/:dishId",
-      component: EditDish
+      component: EditDish,
+      name: "DateEditDish"
     }
   ]
 },
 {
   path: "/dishes",
-  component: Dishes
+  component: Dishes,
+  name: "Dishes"
 },
 {
   path: "/dishes/:dishId",
-  component: Dish
+  component: Dish,
+  name: "Dish"
 },
 {
   path: "/dishes/:dishId/edit",
-  component: EditDish
+  component: EditDish,
+  name: "EditDish"
+},
+{
+  path: "/404",
+  component: NotFound,
+  name: "404"
+},
+{
+  path: "*",
+  redirect: "/404"
 }
 ]
 
