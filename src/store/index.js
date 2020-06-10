@@ -8,7 +8,8 @@ const vuexLocal = new VuexPersistence({
 })
 
 var c;
-
+var api = "https://menyapp.herokuapp.com";
+var ws = "wss://menyapp.herokuapp.com/ws";
 var connectCount = 0;
 var active = false;
 var initialSet = "";
@@ -181,7 +182,7 @@ export default new Vuex.Store({
     async logout({ commit }) {
       c.close();
       commit("logout");
-      await fetch("http://localhost:5000/logout", {
+      await fetch(api + "/logout", {
         credentials: 'include'
       });
     },
@@ -196,7 +197,7 @@ export default new Vuex.Store({
       }
     },
     async login({ commit, dispatch }, payload) {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(api + "/login", {
         method: "POST", credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -216,7 +217,7 @@ export default new Vuex.Store({
     async connect({ commit, state, dispatch }) {
       if (!state.user) return;
       connectCount++;
-      c = new WebSocket("ws://localhost:5000/ws");
+      c = new WebSocket(ws);
       c.onmessage = (event) => {
         var data = JSON.parse(event.data);
         switch (data.method) {
