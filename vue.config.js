@@ -14,7 +14,7 @@ module.exports = {
     pwa: {
         name: 'Meny',
         themeColor: '#ffffff',
-        msTileColor: 'ffffff',
+        msTileColor: '#ffffff',
         appleMobileWebAppCapable: 'yes',
         manifestOptions: {
             backgroundColor: "#ffffff",
