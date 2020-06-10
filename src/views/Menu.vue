@@ -1,10 +1,10 @@
 <template>
   <div class="page">
-    <b-container class="px-4 my-2 mb-4">
-      <b-link to="/dishes" class="pt-3 float-left" @click="() => scroll = 0">Rätter</b-link>
-      <b-link class="pt-3 float-right" @click="() => scroll = 0">Idag</b-link>
-      <div class="text-center py-1 w-50 m-auto">
-        <img width="90" src="/logo.png" />
+    <b-container class="px-3 mb-5">
+      <b-link to="/dishes" class="pt-4 float-left" @click="() => scroll = 0">Rätter</b-link>
+      <b-link class="pt-4 float-right" @click="() => scroll = 0">Idag</b-link>
+      <div class="text-center py-1 pb-2 w-50 m-auto">
+        <img width="70" src="/logo2.png" />
       </div>
       <b-form-spinbutton
         v-model="scroll"
@@ -13,12 +13,15 @@
         max="100"
       ></b-form-spinbutton>
       <MenuDate
-        :_id="date._id"
+        :dateId="date.date"
         :title="date.title"
-        :today="date._id == today"
+        :today="date.date == today"
         v-for="date in display.days"
-        :key="date._id"
+        :key="date.date"
       />
+      <b-button variant="light" class="text-dark mt-5" to="/settings">
+        <b-icon icon="gear-fill" class="mr-2" />Inställningar
+      </b-button>
     </b-container>
   </div>
 </template>
@@ -28,6 +31,9 @@ import { format, addDays } from "date-fns";
 import { sv } from "date-fns/locale";
 import MenuDate from "@/components/MenuDate";
 export default {
+  metaInfo: {
+    title: "Meny"
+  },
   name: "Menu",
   data: function() {
     return {
@@ -48,7 +54,7 @@ export default {
           title: format(current, "eeee d MMM", {
             locale: sv
           }),
-          _id: format(current, "yyyy-MM-dd")
+          date: format(current, "yyyy-MM-dd")
         };
         newElements.push(newElement);
       }

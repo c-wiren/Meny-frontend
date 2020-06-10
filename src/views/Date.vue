@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <b-container class="my-4 px-4">
+    <b-container class="my-2 px-3">
       <div class="position-relative">
         <b-link class="position-absolute" @click="$router.go(-1)">
           <b-icon icon="chevron-left" scale="1.4" />Meny
@@ -11,17 +11,17 @@
         v-for="dish in dishes"
         img-top
         :img-src="dish.image"
-        :key="dish._id"
+        :key="dish.id"
         class="my-4 border-0 shadow-lg position-relative"
       >
         <b-dropdown right no-caret variant="link" class="edit-food">
           <template v-slot:button-content>
             <b-icon icon="three-dots-vertical" scale="1.3" class="edit-food-button" />
           </template>
-          <b-dropdown-item :to="$route.path + '/edit/' + dish._id">
+          <b-dropdown-item :to="$route.path + '/edit/' + dish.id">
             <b-icon icon="pencil-square" />Redigera
           </b-dropdown-item>
-          <b-dropdown-item @click="removeDish(dish._id)">
+          <b-dropdown-item @click="removeDish(dish.id)">
             <b-icon icon="x" scale="1.2" />Ta bort
           </b-dropdown-item>
         </b-dropdown>
@@ -29,15 +29,21 @@
           <div class="h6">{{dish.name}}</div>
           <small v-html="dish.description"></small>
         </b-card-text>
-        <b-button
-          variant="outline-primary"
-          block
-          class="card-link"
+        <a
+          class="d-flex px-3 py-2 justify-content-between align-items-center border rounded"
           v-if="dish.link"
           :href="dish.link"
           target="_blank"
           rel="noopener noreferrer"
-        >Recept</b-button>
+        >
+          <div class="text-nowrap overflow-hidden">
+            <div class="small text-truncate">{{dish.metaSite ? dish.metaSite : "Recept"}}</div>
+            <div
+              class="small text-dark text-truncate"
+            >{{dish.metaTitle ? dish.metaTitle : dish.name}}</div>
+          </div>
+          <b-icon scale="1.3" icon="chevron-right" />
+        </a>
       </b-card>
       <div class="my-5">
         <b-button :to="$route.path + '/add'" variant="link" class="text-secondary" block>
@@ -47,36 +53,47 @@
       </div>
     </b-container>
     <div v-if="$route.name != 'Date'" class="overlay" style="z-index: 1000">
-      <router-view class="bg-white rounded-top h-100 pt-2" :date="$route.params._id" />
+      <router-view class="bg-white rounded-top pt-2" :date="$route.params.date" />
     </div>
   </div>
 </template>
 <script>
 export default {
+  metaInfo() {
+    return {
+      title: this.dateString
+    };
+  },
   methods: {
-    removeDish(id) {
+    async removeDish(id) {
+      var accept = await this.$swal({
+        icon: "question",
+        title: "Är du säker?"
+      });
+      if (accept.isDismissed) return;
       const payload = {
-        dateId: this.$route.params._id,
+        dateId: this.$route.params.date,
         dishId: id
       };
-      if (confirm("Är du säker?")) this.$store.commit("removeDish", payload);
+      this.$store.dispatch("removeDish", payload);
     }
   },
   computed: {
     dateString() {
-      const date = new Date(this.$route.params._id);
+      const date = new Date(this.$route.params.date);
       return format(date, "eeee d MMM", {
         locale: sv
       });
     },
     date() {
-      return this.$store.state.dates[this.$route.params._id];
+      return this.$store.state.dates[this.$route.params.date];
     },
     dishes() {
       if (this.date && this.date.dishIds) {
         var dishes = [];
         for (var i in this.date.dishIds) {
-          dishes.push(this.$store.state.dishes[this.date.dishIds[i]]);
+          var dish = this.$store.state.dishes[this.date.dishIds[i]];
+          if (!dish.deleted) dishes.push(dish);
         }
         return dishes;
       } else return null;
@@ -120,5 +137,15 @@ import { sv } from "date-fns/locale";
   left: 0;
   right: 0;
   bottom: 0;
+}
+.overlay > div {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  overflow-y: scroll;
 }
 </style>

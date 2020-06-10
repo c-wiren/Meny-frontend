@@ -1,5 +1,5 @@
 <template>
-  <b-container class="my-4 px-4">
+  <b-container class="mt-2 mb-4 px-3">
     <div class="pb-3">
       <b-link @click="$router.go(-1)" class="float-left">Avbryt</b-link>
       <b-link
@@ -23,10 +23,23 @@
       />
       <b-form-input v-model="dish.link" placeholder="Länk till recept" />
     </b-form>
+    <b-button
+      v-if="Object.keys(originalDish).length"
+      @click="remove"
+      class="mt-5 text-danger"
+      variant="light"
+    >Radera rätt</b-button>
   </b-container>
 </template>
 <script>
 export default {
+  metaInfo() {
+    return {
+      title: Object.keys(this.originalDish).length
+        ? "Redigera rätt"
+        : "Skapa rätt"
+    };
+  },
   created() {
     if (
       this.$route.params.dishId != this.$store.state.newDish &&
@@ -36,31 +49,38 @@ export default {
     }
   },
   methods: {
+    async remove() {
+      var accept = await this.$swal({
+        icon: "question",
+        title: "Är du säker?",
+        text: "Rätten raderas permanent"
+      });
+      if (accept.isDismissed) return;
+      this.$store.dispatch("updateDish", { id: this.dish.id, deleted: true });
+      this.$router.go(-1);
+    },
     done() {
       if (!Object.keys(this.originalDish).length) {
-        this.$store.commit("createDish", {
-          _id: this.$route.params.dishId,
-          description: null,
-          link: null,
-          image: null,
+        this.$store.dispatch("createDish", {
+          id: this.$route.params.dishId,
           ...this.dish
         });
       } else {
-        this.$store.commit("updateDish", this.dish);
+        var dish = { id: this.dish.id };
+        if (this.dish.name != this.originalDish.name)
+          dish.name = this.dish.name;
+        if (this.dish.description != this.originalDish.description)
+          dish.description = this.dish.description;
+        if (this.dish.link != this.originalDish.link) {
+          dish.link = this.dish.link;
+          dish.metaTitle = "";
+          dish.metaSite = "";
+        }
+        if (this.dish.image != this.originalDish.image)
+          dish.image = this.dish.image;
+        this.$store.dispatch("updateDish", dish);
       }
-      var navigateTo;
-      switch (this.$route.name) {
-        case "EditDish":
-          navigateTo = "Dish";
-          break;
-        case "DateEditDish":
-          navigateTo = "Date";
-          break;
-        case "DateAddEditDish":
-          navigateTo = "DateDish";
-          break;
-      }
-      this.$router.replace({ name: navigateTo });
+      this.$router.go(-1);
     }
   },
   data() {

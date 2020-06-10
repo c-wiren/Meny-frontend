@@ -1,3 +1,15 @@
+// Colors
+$theme-colors: (
+  "primary": #F09D51,
+  "secondary": #618985,
+  "success": #36C759,
+  "danger": #E63946,
+  "info": #96BBBB
+);
+$light: #dce5e5;
+$dark: #373736;
+$yiq-contrasted-threshold: 180;
+
 // Text
 $headings-font-weight: 600;
 
@@ -5,6 +17,10 @@ $headings-font-weight: 600;
 $card-border-width: 0;
 
 // Buttons
+.btn {
+  margin: auto;
+  display: block !important;
+}
 $input-btn-font-size: 1rem;
 $btn-font-weight: 600;
 $input-btn-padding-y: 0.6rem;
@@ -17,7 +33,7 @@ $border-radius-lg: 1rem;
 $border-radius-sm: 0.5rem;
 $card-border-radius: $border-radius-lg;
 $input-btn-focus-box-shadow: none;
-$input-bg: #eee;
+$input-bg: $light;
 $input-border-color: transparent;
 $input-focus-border-color: #0003;
 $input-focus-bg: white;
@@ -42,17 +58,12 @@ border: 0 !important;
   transform: scale(1) !important;
 }
 :root {
+  color: $dark;
   font-size: 18px;
   overflow-x: hidden;
   overflow-wrap: break-word;
 }
 
-// Colors
-$theme-colors: (
-  "primary": #057afb,
-  "secondary": #aaa,
-  "success": #36C759,
-);
 .large {
   font-size: 1.2rem;
 }
@@ -65,4 +76,30 @@ $theme-colors: (
 }
 .text-decoration-none {
   text-decoration: none !important;
+}
+
+
+// MenuDish
+.food-image {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.3rem;
+  color: #fffb;
+  text-align: center;
+  line-height: 3.5rem;
+  border-radius: 0.8rem;
+  background-color: $light;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1rem;
+  background-size: cover;
+  background-position: center center;
+}
+
+.arrow {
+  float: right;
+  height: 3.5rem;
+}
+.text-decoration-underline {
+  text-decoration: underline;
 }

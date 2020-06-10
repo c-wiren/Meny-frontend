@@ -5,16 +5,29 @@
       <router-view />
       <!--</transition>-->
     </keep-alive>
+    <template v-if="$store.state.user">
+      <b-badge variant="light" v-if="$store.state.status == 0" class="status text-danger">Offline</b-badge>
+      <b-badge variant="light" v-if="$store.state.status == 1" class="status text-dark">Ansluter...</b-badge>
+    </template>
   </div>
 </template>
 <script>
 export default {
+  metaInfo: {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "Sida",
+    // all titles will be injected into this template
+    titleTemplate: "%s | Meny"
+  },
   watch: {
     $route(to, from) {
       const toDepth = to.path.split("/").length;
       const fromDepth = from.path.split("/").length;
       this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
     }
+  },
+  async created() {
+    this.$store.dispatch("init");
   }
 };
 </script>
@@ -52,5 +65,11 @@ export default {
 }
 .slide-right-leave-to {
   transform: translateX(30%);
+}
+.status {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 0.3rem;
 }
 </style>

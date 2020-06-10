@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueSweetalert2 from 'vue-sweetalert2';
+import VueMeta from 'vue-meta'
+
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 import {
   BootstrapVue,
@@ -12,6 +17,18 @@ import store from './store'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(VueMeta)
+Vue.use(VueSweetalert2, {
+  customClass: {
+    confirmButton: 'btn btn-primary mx-1 mw-5',
+    cancelButton: 'btn btn-outline-secondary mx-1 mw-5',
+    popup: 'rounded shadow-lg',
+  },
+  buttonsStyling: false,
+  cancelButtonText: "Avbryt"
+
+});
+
 Vue.config.productionTip = false
 
 new Vue({
