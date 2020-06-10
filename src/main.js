@@ -13,6 +13,7 @@ import {
 } from 'bootstrap-vue'
 
 import store from './store'
+import './registerServiceWorker'
 
 
 Vue.use(BootstrapVue)
