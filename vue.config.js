@@ -24,15 +24,16 @@ module.exports = {
             msTileImage: 'img/icons/msapplication-icon-144x144.png'
         },
         manifestOptions: {
+            backgroundColor: "#ffffff",
             icons: [
                 {
-                    src: "/android-chrome-192x192.png",
+                    src: "/img/icons/android-chrome-192x192.png",
                     sizes: "192x192",
                     type: "image/png",
                     purpose: "maskable"
                 },
                 {
-                    src: "/android-chrome-512x512.png",
+                    src: "/img/icons/android-chrome-512x512.png",
                     sizes: "512x512",
                     type: "image/png",
                     purpose: "maskable"
