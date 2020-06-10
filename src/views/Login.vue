@@ -5,7 +5,7 @@
     </b-link>
     <h1 class="h6 text-center pb-2 m-auto w-50">Logga in</h1>
     <b-form class="my-3" @submit.prevent="login">
-      <b-form-input v-model="user.email" placeholder="E-postadress" class="my-2" />
+      <b-form-input v-model="user.email" placeholder="E-postadress" type="email" class="my-2" />
       <b-form-input v-model="user.password" placeholder="Lösenord" type="password" class="my-2" />
       <b-button
         block
