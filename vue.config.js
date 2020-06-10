@@ -18,6 +18,7 @@ module.exports = {
         appleMobileWebAppCapable: 'yes',
         manifestOptions: {
             backgroundColor: "#ffffff",
+            startUrl: "/"
         },
     }
 };
