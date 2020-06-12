@@ -70,6 +70,6 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
-  margin: 0.3rem;
+  margin: 1rem;
 }
 </style>
