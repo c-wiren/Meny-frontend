@@ -8,8 +8,8 @@ const vuexLocal = new VuexPersistence({
 })
 
 var c;
-var api = "https://api.meny.wiren.cc";
-var ws = "wss://api.meny.wiren.cc/ws";
+var api = "https://apimeny.wiren.cc";
+var ws = "wss://apimeny.wiren.cc/ws";
 var connectCount = 0;
 var active = false;
 var initialSet = "";
