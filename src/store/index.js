@@ -8,8 +8,8 @@ const vuexLocal = new VuexPersistence({
 })
 
 var c;
-var api = "https://apimeny.wiren.cc";
-var ws = "wss://apimeny.wiren.cc/ws";
+var api = process.env.NODE_ENV == "development" ? "http://localhost:5000" : "https://apimeny.wiren.cc";
+var ws = process.env.NODE_ENV == "development" ? "ws://localhost:5000/ws" : "wss://apimeny.wiren.cc/ws";
 var connectCount = 0;
 var active = false;
 var initialSet = "";
@@ -220,6 +220,7 @@ export default new Vuex.Store({
       c = new WebSocket(ws);
       c.onmessage = (event) => {
         var data = JSON.parse(event.data);
+        if (process.env.NODE_ENV == 'development') console.log(data);
         switch (data.method) {
           case "set":
             dispatch("serverSet", data)
@@ -232,13 +233,20 @@ export default new Vuex.Store({
       c.onopen = () => {
         initialSet = ObjectId();
         c.send(JSON.stringify({ method: "get", params: { changed: state.changed, id: initialSet } }));
-        connectCount = 0;
+        connectCount = 1;
+        setTimeout(() => { if (connectCount == 1) connectCount = 0 }, 3000);
         commit("status", 1);
+        if (process.env.NODE_ENV == 'development') console.log("connected");
       };
       c.onclose = () => {
         active = false;
         commit("status", 0);
-        if (navigator.onLine) setTimeout(() => dispatch("connect"), connectCount > 3 ? 30000 : 3000);
+        if (navigator.onLine) {
+          if (connectCount == 0) {
+            dispatch("connect");
+          } else setTimeout(() => dispatch("connect"), connectCount > 3 ? 30000 : 3000);
+        }
+        if (process.env.NODE_ENV == 'development') console.log("disconnected");
       };
     },
     init({ state, dispatch }) {
