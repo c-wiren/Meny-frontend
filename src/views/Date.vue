@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <b-container class="my-2 px-3">
+    <b-container class="mt-2 mb-4 px-3 mt-md-4" fluid="lg">
       <div class="position-relative">
         <b-link class="position-absolute" @click="$router.go(-1)">
           <b-icon icon="chevron-left" scale="1.4" />Meny

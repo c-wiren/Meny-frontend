@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <b-container class="px-3 mb-5">
+    <b-container class="px-3 mb-5 mt-md-2" fluid="lg">
       <b-link to="/dishes" class="pt-4 float-left" @click="() => scroll = 0">Rätter</b-link>
       <b-link class="pt-4 float-right" @click="() => scroll = 0">Idag</b-link>
       <div class="text-center py-1 pb-2 w-50 m-auto">

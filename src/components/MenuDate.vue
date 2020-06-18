@@ -1,16 +1,16 @@
 <template>
   <router-link :to="'/date/' + dateId" class="text-dark">
-    <div class="my-3">
+    <div class="my-3 d-flex align-items-center">
       <div
-        class="food-image"
+        class="food-image flex-shrink-0"
         :style="{backgroundImage: (dish && dish.image) ? ('url(' + dish.image + ')') : null}"
       >
         <b-icon icon="heart-fill" v-if="!dish || !dish.image" />
       </div>
-      <div class="d-inline-block border-0 align-middle">
+      <div class="d-inline-block flex-fill border-0">
         <span :class="{'text-primary': today}">{{title}}</span>
         <br />
-        <small v-if="dish">{{dish.name}}</small>
+        <small class="text-truncate" v-if="dish">{{dish.name}}</small>
       </div>
       <b-icon class="arrow text-secondary" scale="1.2" icon="chevron-right" />
     </div>

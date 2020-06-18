@@ -1,5 +1,5 @@
 <template>
-  <b-container class="my-2 px-3">
+  <b-container class="mt-2 mb-4 px-3 mt-md-4" fluid="lg">
     <b-link class="pt-3 float-right" to="/login">Logga in</b-link>
     <div class="text-center py-1 pb-4 w-50 m-auto">
       <img width="70" src="/logo2.png" />

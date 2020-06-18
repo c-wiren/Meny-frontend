@@ -1,12 +1,12 @@
 <template>
-  <b-container class="mt-2 mb-4 px-3">
+  <b-container class="mt-2 mb-4 mt-md-4 px-3" fluid="lg">
     <b-link class="float-left" @click="$router.go(-1)">
       <b-icon icon="chevron-left" scale="1.4" />Rätter
     </b-link>
     <b-link :to="$route.path + '/edit'" class="float-right">Ändra</b-link>
     <img class="image-full mt-2 mb-3 w-100 rounded" :src="dish.image" />
     <h1 class="h4">{{dish.name}}</h1>
-    <p v-html="dish.description"></p>
+    <p class="white-space-pre-line">{{dish.description}}</p>
     <template v-if="date">
       <b-button
         disabled

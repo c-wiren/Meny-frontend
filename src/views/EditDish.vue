@@ -1,5 +1,5 @@
 <template>
-  <b-container class="mt-2 mb-4 px-3">
+  <b-container class="mt-2 mb-4 mt-md-4 px-3" fluid="lg">
     <div class="pb-3">
       <b-link @click="$router.go(-1)" class="float-left">Avbryt</b-link>
       <b-link

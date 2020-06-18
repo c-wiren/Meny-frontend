@@ -16,6 +16,13 @@ $headings-font-weight: 600;
 // Cards
 $card-border-width: 0;
 
+
+.white-space-pre-line {
+  white-space: pre-line;
+}
+$enable-hover-media-query: true;
+
+
 // Buttons
 .btn {
   margin: auto;
@@ -35,8 +42,7 @@ $card-border-radius: $border-radius-lg;
 $input-btn-focus-box-shadow: none;
 $input-bg: $light;
 $input-border-color: transparent;
-$input-focus-border-color: #0003;
-$input-focus-bg: white;
+$input-focus-border-color: transparent;
 
 // List
 $list-group-item-padding-y: 0.5rem;
