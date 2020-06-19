@@ -8,8 +8,18 @@
       <b-icon icon="pencil-square" scale="1.2" />
     </b-link>
     <h1 class="h6 text-center pb-2 m-auto w-50">Rätter</h1>
-    <b-input-group class="mb-2">
-      <b-form-input v-model="search" placeholder="Sök" size="sm" />
+    <b-input-group class="mb-2" size="sm" @click="$refs.search.$el.focus()">
+      <b-input-group-prepend>
+        <b-input-group-text class="pr-0 pl-1">
+          <b-icon icon="search" scale="0.7" />
+        </b-input-group-text>
+      </b-input-group-prepend>
+      <b-form-input v-model="search" ref="search" placeholder="Sök" class="px-1" />
+      <b-input-group-append v-if="search" @click="search=''">
+        <b-input-group-text class="pl-0 pr-1">
+          <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />
+        </b-input-group-text>
+      </b-input-group-append>
     </b-input-group>
     <b-list-group>
       <b-list-group-item
@@ -32,6 +42,7 @@
 <script>
 import Fuse from "fuse.js";
 export default {
+  name: "Dishes",
   metaInfo: {
     title: "Rätter"
   },
@@ -53,7 +64,7 @@ export default {
     allDishes() {
       return Object.values(this.$store.state.dishes)
         .filter(x => !x.deleted)
-        .sort((a, b) => a.name > b.name);
+        .sort((a, b) => (a.name > b.name ? 1 : 0));
     },
     fuse() {
       return new Fuse(this.allDishes, {

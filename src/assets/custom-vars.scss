@@ -12,6 +12,7 @@ $yiq-contrasted-threshold: 180;
 
 // Text
 $headings-font-weight: 600;
+$font-size-sm: 0.9rem;
 
 // Cards
 $card-border-width: 0;
@@ -41,8 +42,11 @@ $border-radius-sm: 0.5rem;
 $card-border-radius: $border-radius-lg;
 $input-btn-focus-box-shadow: none;
 $input-bg: $light;
-$input-border-color: transparent;
-$input-focus-border-color: transparent;
+$input-border-color: $light;
+$input-focus-border-color: $light;
+
+$input-group-addon-bg: $light;
+$input-group-addon-border-color: $light;
 
 // List
 $list-group-item-padding-y: 0.5rem;

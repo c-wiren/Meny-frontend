@@ -21,7 +21,19 @@
         max-rows="6"
         placeholder="Beskrivning"
       />
-      <b-form-input v-model="dish.link" placeholder="Länk till recept" />
+      <b-input-group>
+        <b-form-input v-model="dish.link" ref="link" placeholder="Länk till recept" class="pr-0" />
+        <b-input-group-append v-if="dish.link" @click="dish.link=''; $refs.link.$el.focus()">
+          <b-input-group-text class="pl-0 pr-1">
+            <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />
+          </b-input-group-text>
+        </b-input-group-append>
+        <b-input-group-append v-else>
+          <b-input-group-text class="pl-0 pr-2">
+            <b-icon icon="clipboard" scale="0.9" class="cursor-pointer" @click="pasteLink" />
+          </b-input-group-text>
+        </b-input-group-append>
+      </b-input-group>
     </b-form>
     <b-button
       v-if="Object.keys(originalDish).length"
@@ -49,6 +61,10 @@ export default {
     }
   },
   methods: {
+    pasteLink() {
+      this.$refs.link.$el.focus();
+      document.execCommand("paste");
+    },
     async remove() {
       var accept = await this.$swal({
         icon: "question",

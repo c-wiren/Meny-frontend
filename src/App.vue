@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive include="Menu">
+    <keep-alive :include="['Menu', 'Dishes']">
       <!--<transition :name="transitionName">-->
       <router-view />
       <!--</transition>-->
