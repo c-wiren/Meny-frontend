@@ -14,7 +14,16 @@
           <b-icon icon="search" scale="0.7" />
         </b-input-group-text>
       </b-input-group-prepend>
-      <b-form-input v-model="search" ref="search" placeholder="Sök" class="px-1" />
+      <b-form-input
+        v-model="search"
+        ref="search"
+        placeholder="Sök"
+        class="px-1"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
       <b-input-group-append v-if="search" @click="search=''">
         <b-input-group-text class="pl-0 pr-1">
           <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />

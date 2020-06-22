@@ -13,7 +13,7 @@
         <img :src="dish.image" class="w-50 rounded" />
         <b-link class="d-block my-1">Ändra</b-link>
       </div>
-      <b-form-input class="my-2" v-model="dish.name" placeholder="Namn" />
+      <b-form-input class="my-2" v-model="dish.name" placeholder="Namn" autocomplete="off" />
       <b-form-textarea
         class="my-2"
         v-model="dish.description"
@@ -22,7 +22,14 @@
         placeholder="Beskrivning"
       />
       <b-input-group>
-        <b-form-input v-model="dish.link" ref="link" placeholder="Länk till recept" class="pr-0" />
+        <b-form-input
+          type="url"
+          v-model="dish.link"
+          ref="link"
+          placeholder="Länk till recept"
+          class="pr-0"
+          autocomplete="off"
+        />
         <b-input-group-append v-if="dish.link" @click="dish.link=''; $refs.link.$el.focus()">
           <b-input-group-text class="pl-0 pr-1">
             <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />
@@ -36,7 +43,7 @@
       </b-input-group>
     </b-form>
     <b-button
-      v-if="Object.keys(originalDish).length"
+      v-if="Object.keys(originalDish).length && this.$route.name == 'EditDish'"
       @click="remove"
       class="mt-5 text-danger"
       variant="light"

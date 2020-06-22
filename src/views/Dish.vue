@@ -4,7 +4,7 @@
       <b-icon icon="chevron-left" scale="1.4" />Rätter
     </b-link>
     <b-link :to="$route.path + '/edit'" class="float-right">Ändra</b-link>
-    <img class="image-full mt-2 mb-3 w-100 rounded" :src="dish.image" />
+    <img class="image-full mt-2 mb-3 w-100 rounded dish-img" :src="dish.image" />
     <h1 class="h4">{{dish.name}}</h1>
     <p class="white-space-pre-line">{{dish.description}}</p>
     <template v-if="date">
@@ -58,3 +58,10 @@ export default {
   props: ["date"]
 };
 </script>
+
+<style>
+.dish-img {
+  max-height: 230px;
+  object-fit: cover;
+}
+</style>

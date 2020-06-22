@@ -148,4 +148,8 @@ import { sv } from "date-fns/locale";
   margin-top: 0 !important;
   overflow-y: scroll;
 }
+.card-img-top {
+  max-height: 230px;
+  object-fit: cover;
+}
 </style>

@@ -7,12 +7,14 @@
       >
         <b-icon icon="heart-fill" v-if="!dish || !dish.image" />
       </div>
-      <div class="d-inline-block flex-fill border-0">
+      <div class="flex-fill border-0">
         <span :class="{'text-primary': today}">{{title}}</span>
         <br />
-        <small class="text-truncate" v-if="dish">{{dish.name}}</small>
+        <small class="text-truncate d-block" v-if="dish">{{dish.name}}</small>
       </div>
-      <b-icon class="arrow text-secondary" scale="1.2" icon="chevron-right" />
+      <div>
+        <b-icon class="arrow text-secondary" scale="1.2" icon="chevron-right" />
+      </div>
     </div>
   </router-link>
 </template>
