@@ -15,7 +15,8 @@
         </b-input-group-text>
       </b-input-group-prepend>
       <b-form-input
-        v-model="search"
+        :value="search"
+        @input="(value) => search=value"
         ref="search"
         placeholder="Sök"
         class="px-1"
@@ -73,7 +74,7 @@ export default {
     allDishes() {
       return Object.values(this.$store.state.dishes)
         .filter(x => !x.deleted)
-        .sort((a, b) => (a.name > b.name ? 1 : 0));
+        .sort((a, b) => (a.name > b.name ? 1 : -1));
     },
     fuse() {
       return new Fuse(this.allDishes, {
