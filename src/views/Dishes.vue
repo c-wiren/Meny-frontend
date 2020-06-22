@@ -11,7 +11,7 @@
     <b-input-group class="mb-2" size="sm" @click="$refs.search.$el.focus()">
       <b-input-group-prepend>
         <b-input-group-text class="pr-0 pl-1">
-          <b-icon icon="search" scale="0.7" />
+          <b-icon icon="search" scale="0.7" class="text-muted" />
         </b-input-group-text>
       </b-input-group-prepend>
       <b-form-input
@@ -26,7 +26,7 @@
       />
       <b-input-group-append v-if="search" @click="search=''">
         <b-input-group-text class="pl-0 pr-1">
-          <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />
+          <b-icon icon="x-circle-fill" scale="0.8" class="cursor-pointer text-muted" />
         </b-input-group-text>
       </b-input-group-append>
     </b-input-group>

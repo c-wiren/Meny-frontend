@@ -32,12 +32,17 @@
         />
         <b-input-group-append v-if="dish.link" @click="dish.link=''; $refs.link.$el.focus()">
           <b-input-group-text class="pl-0 pr-1">
-            <b-icon icon="x-circle-fill" scale="0.7" class="cursor-pointer" />
+            <b-icon icon="x-circle-fill" scale="0.8" class="cursor-pointer text-muted" />
           </b-input-group-text>
         </b-input-group-append>
         <b-input-group-append v-else>
           <b-input-group-text class="pl-0 pr-2">
-            <b-icon icon="clipboard" scale="0.9" class="cursor-pointer" @click="pasteLink" />
+            <b-icon
+              icon="clipboard"
+              scale="0.8"
+              class="cursor-pointer text-muted"
+              @click="pasteLink"
+            />
           </b-input-group-text>
         </b-input-group-append>
       </b-input-group>

@@ -7,7 +7,7 @@
       >
         <b-icon icon="heart-fill" v-if="!dish || !dish.image" />
       </div>
-      <div class="flex-fill border-0">
+      <div class="flex-fill border-0 w-0">
         <span :class="{'text-primary': today}">{{title}}</span>
         <br />
         <small class="text-truncate d-block" v-if="dish">{{dish.name}}</small>
