@@ -9,6 +9,11 @@
       <b-badge variant="light" v-if="$store.state.status == 0" class="status text-danger">Offline</b-badge>
       <b-badge variant="light" v-if="$store.state.status == 1" class="status text-dark">Ansluter...</b-badge>
     </template>
+    <div v-if="dev">
+      {{$store.state.changedDishes}}
+      <br />
+      {{$store.state.changedDates}}
+    </div>
   </div>
 </template>
 <script>
@@ -19,6 +24,9 @@ export default {
     // all titles will be injected into this template
     titleTemplate: "%s | Meny"
   },
+  data: () => ({
+    dev: process.env.NODE_ENV == "development"
+  }),
   watch: {
     $route(to, from) {
       const toDepth = to.path.split("/").length;

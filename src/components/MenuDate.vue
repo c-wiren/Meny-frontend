@@ -3,9 +3,11 @@
     <div class="my-3 d-flex align-items-center">
       <div
         class="food-image flex-shrink-0"
+        :class="{'bg-light': dish && !dish.image}"
         :style="{backgroundImage: (dish && dish.image) ? ('url(' + dish.image + ')') : null}"
       >
-        <b-icon icon="heart-fill" v-if="!dish || !dish.image" />
+        <b-icon icon="image" v-if="dish && !dish.image" />
+        <b-icon icon="heart-fill" v-if="!dish" />
       </div>
       <div class="flex-fill border-0 w-0">
         <span :class="{'text-primary': today}">{{title}}</span>

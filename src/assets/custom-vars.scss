@@ -101,7 +101,7 @@ border: 0 !important;
   text-align: center;
   line-height: 3.5rem;
   border-radius: 0.8rem;
-  background-color: $light;
+  background-color: #eee;
   display: inline-block;
   vertical-align: middle;
   margin-right: 1rem;
@@ -115,4 +115,14 @@ border: 0 !important;
 }
 .text-decoration-underline {
   text-decoration: underline;
+}
+
+
+// Link
+$link-hover-decoration: none;
+a {
+  transition: opacity 0.1s ease-out;
+}
+a:active {
+  opacity: 0.6;
 }

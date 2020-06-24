@@ -88,6 +88,13 @@ export default {
       this.$router.go(-1);
     },
     done() {
+      // Trim spaces
+      if (this.dish.name) this.dish.name = this.dish.name.trim();
+      if (this.dish.description)
+        this.dish.description = this.dish.description.trim();
+      if (this.dish.image) this.dish.image = this.dish.image.trim();
+      if (this.dish.link) this.dish.link = this.dish.link.trim();
+
       if (!Object.keys(this.originalDish).length) {
         this.$store.dispatch("createDish", {
           id: this.$route.params.dishId,

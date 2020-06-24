@@ -1,24 +1,12 @@
-# matschema
+![](https://meny.wiren.cc/img/icons/apple-touch-icon-180x180.png)
 
-## Project setup
-```
-npm install
-```
+# Meny
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Meny is a web application for meal planning
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[https://meny.wiren.cc/](https://meny.wiren.cc/)
 
-### Lints and fixes files
-```
-npm run lint
-```
+It syncs data between all devices in realtime over websockets. Full functionality when offline, including editing. All changes are saved locally and syncs immediately when reconnected.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Frontend: [https://github.com/chrwir/Meny-frontend](https://github.com/chrwir/Meny-frontend)
+

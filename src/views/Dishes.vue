@@ -39,14 +39,19 @@
         class="d-flex align-items-center"
       >
         <div
-          class="food-image small flex-shrink-0"
+          class="food-image small bg-light flex-shrink-0"
           :style="{backgroundImage: (dish.image) ? ('url(' + dish.image + ')') : null}"
         >
-          <b-icon icon="heart-fill" v-if="!dish.image" />
+          <b-icon icon="image" v-if="!dish.image" />
         </div>
         <div class="text-dark food-text">{{dish.name}}</div>
       </b-list-group-item>
     </b-list-group>
+    <div class="my-4 text-center" v-if="!allDishes.length && !search.length">
+      <span class="text-muted">Du har inga rätter</span>
+      <b-button variant="outline-primary" class="my-3" @click="newDish">Lägg till</b-button>
+    </div>
+    <div v-if="search.length && !dishes.length" class="text-muted text-center my-4">Ingen hittades</div>
   </b-container>
 </template>
 <script>
@@ -98,6 +103,7 @@ export default {
 .food-image.small {
   width: 3.1rem;
   height: 3.1rem;
+  font-size: 1.2rem !important;
   line-height: 3.1rem;
   border-radius: 0.7rem;
   margin-right: 0.8rem;

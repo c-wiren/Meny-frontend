@@ -9,6 +9,7 @@ import Dish from '../views/Dish.vue'
 import EditDish from '../views/EditDish.vue'
 import Login from '../views/Login.vue'
 import NotFound from '../views/404.vue'
+import Signup from '../views/Signup.vue'
 import store from '../store/index.js'
 
 
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     component: Index,
     name: "Index"
+  },
+  {
+    path: '/signup',
+    component: Signup,
+    name: "Signup"
   },
   {
     path: '/settings',
@@ -94,8 +100,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.state.user && !["Login", "Index"].includes(to.name)) next({ name: 'Login' })
-  else if (store.state.user && ["Login", "Index"].includes(to.name)) next({ name: "Menu" })
+  if (!store.state.user && !["Login", "Index", "Signup"].includes(to.name)) next({ name: 'Login' })
+  else if (store.state.user && ["Login", "Index", "Signup"].includes(to.name)) next({ name: "Menu" })
   else next()
 })
 

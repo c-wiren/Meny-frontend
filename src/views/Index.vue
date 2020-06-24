@@ -6,7 +6,7 @@
     </div>
     <EatingImage class="d-block img-fluid m-auto" width="400" />
     <h1 class="text-center my-3">Planera din mat</h1>
-    <b-button variant="primary" class="my-5">Skapa konto</b-button>
+    <b-button variant="primary" class="my-5" @click="$router.push('/signup')">Skapa konto</b-button>
   </b-container>
 </template>
 <script>

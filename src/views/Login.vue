@@ -1,5 +1,5 @@
 <template>
-  <b-container class="mt-2 mb-4 px-3">
+  <b-container class="mt-2 mb-4 px-3 mt-md-4">
     <b-link class="float-left" @click="$router.go(-1)">
       <b-icon icon="chevron-left" scale="1.4" />Tillbaka
     </b-link>

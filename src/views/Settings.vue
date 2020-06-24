@@ -11,7 +11,6 @@
     <b-form @submit.prevent>
       <b-form-input class="my-2" placeholder="Nuvarande lösenord" />
       <b-form-input class="my-2" placeholder="Nytt lösenord" />
-      <b-form-input class="my-2" placeholder="Bekräfta nytt lösenord" />
       <b-button class="my-3" type="submit" block variant="primary">Byt lösenord</b-button>
     </b-form>
     <b-button variant="light" class="text-danger my-5" block @click="logout">Logga ut</b-button>

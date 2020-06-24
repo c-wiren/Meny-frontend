@@ -4,7 +4,7 @@
       <b-link to="/dishes" class="pt-4 float-left" @click="() => scroll = 0">Rätter</b-link>
       <b-link class="pt-4 float-right" @click="() => scroll = 0">Idag</b-link>
       <div class="text-center py-1 pb-2 w-50 m-auto">
-        <img width="70" src="/logo2.png" />
+        <img width="70" src="/logo2.png" @click="() => scroll = 0" class="cursor-pointer" />
       </div>
       <b-form-spinbutton
         v-model="scroll"

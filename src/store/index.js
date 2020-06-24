@@ -61,22 +61,20 @@ export default new Vuex.Store({
       state.newDish = ObjectId();
     },
     createDish(state, payload) {
-      if (state.newDish == payload.id) {
-        var dish = payload.data;
-        var changeId = payload.id;
-        Vue.set(state.dishes, dish.id, dish);
-        state.newDish = null;
-        var changed = {};
-        for (var i in dish) {
-          if (i != "id")
-            changed[i] = true
-        }
-        state.changedDishes[payload.id] = changed;
-        if (changeId) {
-          var requestDishes = {};
-          requestDishes[dish.id] = changed;
-          requests[changeId] = { dishes: requestDishes };
-        }
+      var dish = payload.data;
+      var changeId = payload.id;
+      Vue.set(state.dishes, dish.id, dish);
+      state.newDish = null;
+      var changed = {};
+      for (var i in dish) {
+        if (i != "id")
+          changed[i] = true
+      }
+      state.changedDishes[dish.id] = changed;
+      if (changeId) {
+        var requestDishes = {};
+        requestDishes[dish.id] = changed;
+        requests[changeId] = { dishes: requestDishes };
       }
     },
     status(state, payload) {
@@ -179,6 +177,33 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async validate(_, payload) {
+      var response = await fetch(api + "/validate", {
+        method: 'POST',
+        body: payload
+      });
+      if (response.ok) return response.text();
+      else throw response.status;
+    },
+    async signup({ commit, dispatch }, payload) {
+      var response = await fetch(api + "/users", {
+        credentials: "include",
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      if (response.ok) {
+        var data = await response.json();
+        commit('login', data);
+        dispatch("connect");
+        return
+      }
+      else {
+        throw response.status
+      }
+    },
     async logout({ commit }) {
       c.close();
       commit("logout");
@@ -220,7 +245,7 @@ export default new Vuex.Store({
       c = new WebSocket(ws);
       c.onmessage = (event) => {
         var data = JSON.parse(event.data);
-        if (process.env.NODE_ENV == 'development') console.log(data);
+        if (process.env.NODE_ENV == 'development') console.log("onmessage: " + data);
         switch (data.method) {
           case "set":
             dispatch("serverSet", data)
@@ -253,11 +278,13 @@ export default new Vuex.Store({
       window.addEventListener('online', () => dispatch("connect"));
       if (state.user) dispatch("connect");
     },
-    createDish({ commit }, payload) {
-      if (active) var changeId = ObjectId();
-      commit("createDish", { data: payload, id: changeId });
-      if (changeId)
-        c.send(JSON.stringify({ method: "set", data: { dishes: [payload] }, params: { id: changeId } }))
+    createDish({ state, commit }, payload) {
+      if (state.newDish == payload.id) {
+        if (active) var changeId = ObjectId();
+        commit("createDish", { data: payload, id: changeId });
+        if (changeId)
+          c.send(JSON.stringify({ method: "set", data: { dishes: [payload] }, params: { id: changeId } }))
+      }
     },
     updateDish({ commit }, payload) {
       if (active) var changeId = ObjectId();
