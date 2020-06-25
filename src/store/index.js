@@ -177,6 +177,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async updateUser(_, payload) {
+      var response = await fetch(api + "/users", {
+        credentials: "include",
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      if (response.ok) {
+        // var data = await response.json();
+        return
+      }
+      else {
+        throw response.status
+      }
+    },
     async validate(_, payload) {
       var response = await fetch(api + "/validate", {
         method: 'POST',

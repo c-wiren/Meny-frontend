@@ -8,45 +8,49 @@
         class="float-right"
       >Klar</b-link>
     </div>
-    <b-form id="form" class="py-3">
-      <div v-if="dish.image" class="text-center my-2">
-        <img :src="dish.image" class="w-50 rounded" />
-        <b-link class="d-block my-1">Ändra</b-link>
-      </div>
-      <b-form-input class="my-2" v-model="dish.name" placeholder="Namn" autocomplete="off" />
-      <b-form-textarea
-        class="my-2"
-        v-model="dish.description"
-        rows="2"
-        max-rows="6"
-        placeholder="Beskrivning"
-      />
-      <b-input-group>
-        <b-form-input
-          type="url"
-          v-model="dish.link"
-          ref="link"
-          placeholder="Länk till recept"
-          class="pr-0"
-          autocomplete="off"
-        />
-        <b-input-group-append v-if="dish.link" @click="dish.link=''; $refs.link.$el.focus()">
-          <b-input-group-text class="pl-0 pr-1">
-            <b-icon icon="x-circle-fill" scale="0.8" class="cursor-pointer text-muted" />
-          </b-input-group-text>
-        </b-input-group-append>
-        <b-input-group-append v-else>
-          <b-input-group-text class="pl-0 pr-2">
-            <b-icon
-              icon="clipboard"
-              scale="0.8"
-              class="cursor-pointer text-muted"
-              @click="pasteLink"
+    <b-row align-h="center">
+      <b-col cols="12" md="8" lg="6">
+        <b-form id="form" class="py-3">
+          <div v-if="dish.image" class="text-center my-2">
+            <img :src="dish.image" class="w-50 rounded" />
+            <b-link class="d-block my-1">Ändra</b-link>
+          </div>
+          <b-form-input class="my-2" v-model="dish.name" placeholder="Namn" autocomplete="off" />
+          <b-form-textarea
+            class="my-2"
+            v-model="dish.description"
+            rows="2"
+            max-rows="6"
+            placeholder="Beskrivning"
+          />
+          <b-input-group>
+            <b-form-input
+              type="url"
+              v-model="dish.link"
+              ref="link"
+              placeholder="Länk till recept"
+              class="pr-0"
+              autocomplete="off"
             />
-          </b-input-group-text>
-        </b-input-group-append>
-      </b-input-group>
-    </b-form>
+            <b-input-group-append v-if="dish.link" @click="dish.link=''; $refs.link.$el.focus()">
+              <b-input-group-text class="pl-0 pr-1">
+                <b-icon icon="x-circle-fill" scale="0.8" class="cursor-pointer text-muted" />
+              </b-input-group-text>
+            </b-input-group-append>
+            <b-input-group-append v-else>
+              <b-input-group-text class="pl-0 pr-2">
+                <b-icon
+                  icon="clipboard"
+                  scale="0.8"
+                  class="cursor-pointer text-muted"
+                  @click="pasteLink"
+                />
+              </b-input-group-text>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form>
+      </b-col>
+    </b-row>
     <b-button
       v-if="Object.keys(originalDish).length && this.$route.name == 'EditDish'"
       @click="remove"

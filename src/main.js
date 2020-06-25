@@ -26,7 +26,7 @@ Vue.use(VueSweetalert2, {
     popup: 'rounded shadow-lg',
   },
   buttonsStyling: false,
-  cancelButtonText: "Avbryt"
+  cancelButtonText: "Avbryt",
 
 });
 

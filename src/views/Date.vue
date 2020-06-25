@@ -7,50 +7,54 @@
         </b-link>
         <h1 class="h6 text-center">{{dateString}}</h1>
       </div>
-      <b-card
-        v-for="dish in dishes"
-        img-top
-        :img-src="dish.image"
-        :key="dish.id"
-        class="my-4 border-0 shadow-lg position-relative"
-      >
-        <b-dropdown right no-caret variant="link" class="edit-food">
-          <template v-slot:button-content>
-            <b-icon icon="three-dots-vertical" scale="1.3" class="edit-food-button" />
-          </template>
-          <b-dropdown-item :to="$route.path + '/edit/' + dish.id">
-            <b-icon icon="pencil-square" />Redigera
-          </b-dropdown-item>
-          <b-dropdown-item @click="removeDish(dish.id)">
-            <b-icon icon="x" scale="1.2" />Ta bort
-          </b-dropdown-item>
-        </b-dropdown>
-        <b-card-text>
-          <div class="h6">{{dish.name}}</div>
-          <small v-html="dish.description"></small>
-        </b-card-text>
-        <a
-          class="d-flex px-3 py-2 justify-content-between align-items-center border rounded"
-          v-if="dish.link"
-          :href="dish.link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="text-nowrap overflow-hidden">
-            <div class="small text-truncate">{{dish.metaSite ? dish.metaSite : "Recept"}}</div>
-            <div
-              class="small text-dark text-truncate"
-            >{{dish.metaTitle ? dish.metaTitle : dish.name}}</div>
+      <b-row align-h="center">
+        <b-col cols="12" md="8" lg="6">
+          <b-card
+            v-for="dish in dishes"
+            img-top
+            :img-src="dish.image"
+            :key="dish.id"
+            class="my-4 border-0 shadow-lg position-relative"
+          >
+            <b-dropdown right no-caret variant="link" class="edit-food">
+              <template v-slot:button-content>
+                <b-icon icon="three-dots-vertical" scale="1.3" class="edit-food-button" />
+              </template>
+              <b-dropdown-item :to="$route.path + '/edit/' + dish.id">
+                <b-icon icon="pencil-square" />Redigera
+              </b-dropdown-item>
+              <b-dropdown-item @click="removeDish(dish.id)">
+                <b-icon icon="x" scale="1.2" />Ta bort
+              </b-dropdown-item>
+            </b-dropdown>
+            <b-card-text>
+              <div class="h6">{{dish.name}}</div>
+              <small v-html="dish.description"></small>
+            </b-card-text>
+            <a
+              class="d-flex px-3 py-2 justify-content-between align-items-center border rounded"
+              v-if="dish.link"
+              :href="dish.link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="text-nowrap overflow-hidden">
+                <div class="small text-truncate">{{dish.metaSite ? dish.metaSite : "Recept"}}</div>
+                <div
+                  class="small text-dark text-truncate"
+                >{{dish.metaTitle ? dish.metaTitle : dish.name}}</div>
+              </div>
+              <b-icon scale="1.3" icon="chevron-right" />
+            </a>
+          </b-card>
+          <div class="my-5">
+            <b-button :to="$route.path + '/add'" variant="link" class="text-secondary" block>
+              <b-icon icon="plus" scale="2" />
+              <small class="d-block my-1 text-decoration-none">Lägg till</small>
+            </b-button>
           </div>
-          <b-icon scale="1.3" icon="chevron-right" />
-        </a>
-      </b-card>
-      <div class="my-5">
-        <b-button :to="$route.path + '/add'" variant="link" class="text-secondary" block>
-          <b-icon icon="plus" scale="2" />
-          <small class="d-block my-1 text-decoration-none">Lägg till</small>
-        </b-button>
-      </div>
+        </b-col>
+      </b-row>
     </b-container>
     <div v-if="$route.name != 'Date'" class="overlay" style="z-index: 1000">
       <router-view class="bg-white rounded-top pt-2" :date="$route.params.date" />
