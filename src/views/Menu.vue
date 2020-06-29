@@ -48,7 +48,7 @@ export default {
   computed: {
     display() {
       var date = new Date();
-      date = addDays(date, date.getDay() * -1 + 1 + this.scroll * 7);
+      date = addDays(date, ((-1 * (date.getDay() + 6)) % 7) + this.scroll * 7);
       var newElements = [];
       var current;
       var newElement;

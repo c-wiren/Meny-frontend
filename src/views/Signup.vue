@@ -152,6 +152,9 @@ export default {
         }
       }
     }
+  },
+  metaInfo: {
+    title: "Skapa konto"
   }
 };
 </script>

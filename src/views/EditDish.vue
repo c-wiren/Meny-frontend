@@ -99,11 +99,26 @@ export default {
       if (this.dish.image) this.dish.image = this.dish.image.trim();
       if (this.dish.link) this.dish.link = this.dish.link.trim();
 
+      // If creating new dish
       if (!Object.keys(this.originalDish).length) {
         this.$store.dispatch("createDish", {
           id: this.$route.params.dishId,
           ...this.dish
         });
+        // If creating new dish inside Date view
+        if (this.$route.name == "DateAddEditDish") {
+          this.$router.replace({
+            name: "DateDish",
+            params: { dishId: this.$route.params.dishId }
+          });
+          // If not
+        } else {
+          this.$router.replace({
+            name: "Dish",
+            params: { dishId: this.$route.params.dishId }
+          });
+        }
+        // If editing existing dish
       } else {
         var dish = { id: this.dish.id };
         if (this.dish.name != this.originalDish.name)
@@ -118,8 +133,8 @@ export default {
         if (this.dish.image != this.originalDish.image)
           dish.image = this.dish.image;
         this.$store.dispatch("updateDish", dish);
+        this.$router.go(-1);
       }
-      this.$router.go(-1);
     }
   },
   data() {
