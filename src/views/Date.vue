@@ -17,9 +17,9 @@
             header-bg-variant="light"
             class="my-4 border-0 shadow-lg position-relative"
           >
-            <template v-slot:header>
+            <template v-slot:header v-if="!dish.image">
               <div class="date-dish-header">
-                <b-icon icon="image" v-if="!dish.image" />
+                <b-icon icon="image" />
               </div>
             </template>
             <b-dropdown right no-caret variant="link" class="edit-food">
