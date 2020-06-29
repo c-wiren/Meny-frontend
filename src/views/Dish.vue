@@ -6,7 +6,14 @@
     <b-link :to="$route.path + '/edit'" class="float-right">Ändra</b-link>
     <b-row align-h="center">
       <b-col cols="12" md="8" lg="6">
-        <img class="image-full mt-2 mb-3 w-100 rounded dish-img" :src="dish.image" />
+        <img
+          v-if="dish.image"
+          class="image-full mt-2 mb-3 w-100 rounded dish-img"
+          :src="dish.image"
+        />
+        <div v-else class="mt-2 mb-3 rounded bg-light date-dish-header">
+          <b-icon icon="image" />
+        </div>
         <h1 class="h4">{{dish.name}}</h1>
         <p class="white-space-pre-line">{{dish.description}}</p>
         <template v-if="date">

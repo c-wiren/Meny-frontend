@@ -14,8 +14,14 @@
             img-top
             :img-src="dish.image"
             :key="dish.id"
+            header-bg-variant="light"
             class="my-4 border-0 shadow-lg position-relative"
           >
+            <template v-slot:header>
+              <div class="date-dish-header">
+                <b-icon icon="image" v-if="!dish.image" />
+              </div>
+            </template>
             <b-dropdown right no-caret variant="link" class="edit-food">
               <template v-slot:button-content>
                 <b-icon icon="three-dots-vertical" scale="1.3" class="edit-food-button" />
